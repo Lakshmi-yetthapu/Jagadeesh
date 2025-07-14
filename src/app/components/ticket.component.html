@@ -1,0 +1,69 @@
+<div class="ticket-container">
+  <table *ngIf="tickets.length > 0; else noTickets" class="ticket-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">  
+        <td>{{ ticket.ticket_date | date: 'short' }}</td>
+        <td>{{ ticket.name }}</td>
+        <td>{{ ticket.description }}</td>
+        <td>{{ ticket.status }}</td>
+        <td class="ticket-actions">
+          <button class="action-btn close-btn" (click)="updateTicket(ticket)">Close</button>
+          <button class="action-btn delete-btn" (click)="deleteTicket(ticket.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noTickets>
+    <p class="no-tickets-message">No tickets found.</p>
+  </ng-template>
+
+  <hr class="divider" />
+
+  <h3 class="form-heading">Add New Ticket</h3>
+  <form #ticketForm="ngForm" (ngSubmit)="createTicket()" class="ticket-form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="newTicket.name"
+        name="name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input
+        id="description"
+        type="text"
+        [(ngModel)]="newTicket.description"
+        name="description"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="newTicket.status" name="status" required>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Closed">Closed</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!ticketForm.valid" class="submit-btn">
+      Add Ticket
+    </button>
+  </form>
+</div>
