@@ -1,0 +1,56 @@
+### Signup
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "name": "john",
+  "password": "password123"
+}
+
+###
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "name": "john",
+  "password": "password123"
+}
+
+###
+
+### Create ticket
+POST http://localhost:3000/tickets
+Content-Type: application/json
+
+{
+  "user_id": "64c12abc1234",
+  "ticket_date": "2025-07-12T12:00:00Z",
+  "name": "Bug fix",
+  "description": "Fix login bug",
+  "status": "Open"
+}
+
+###
+
+### Get tickets for user
+GET http://localhost:3000/tickets/64c12abc1234
+
+###
+
+### Update ticket
+PUT http://localhost:3000/tickets/64c1ticketid567
+Content-Type: application/json
+
+{
+  "ticket_date": "2025-07-12T12:00:00Z",
+  "name": "Bug fix updated",
+  "description": "Updated desc",
+  "status": "Closed"
+}
+
+###
+
+### Delete ticket
+DELETE http://localhost:3000/tickets/64c1ticketid567
